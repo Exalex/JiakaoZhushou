@@ -13,9 +13,11 @@
 @implementation MyDataManager
 
 +(NSArray *)getData:(dataType)type
-{   //用来接收赋完值的model数组
+{
+    //用来接收赋完值的model数组
     NSMutableArray *arr = [[NSMutableArray alloc]init];
-    //1.创建数据库对象
+    
+        //1.创建数据库对象
     static FMDatabase * dataBase;
     if (!dataBase) {
         //2.数据库获取路径
@@ -23,11 +25,14 @@
         //3.用路径创建对象
         dataBase = [[FMDatabase alloc]initWithPath:path];
     }
+    
     if ([dataBase open]) {
         NSLog(@"数据库打开成功");
     }else{
         return arr;
     }
+    
+    
     //4.数据库进行查找
     switch (type) {  //用swich区分哪个类型的数据
         case chapter:
@@ -54,7 +59,8 @@
             
         case answer:
         {
-            NSString *sql = @"select mquestion,mdesc,mid,manswer,miamge,pid,pname,sid,sname,mtype FROM leaflevel";
+            //模型类成员变量接收解析好的数组
+            NSString *sql = @"select mquestion,mdesc,mid,manswer,mimage,pid,pname,sid,sname,mtype FROM leaflevel";
             
             FMResultSet *rs = [dataBase executeQuery:sql];
             while ([rs next]) {
@@ -65,13 +71,13 @@
             model.mdesc = [rs stringForColumn:@"mdesc"];
             model.mid = [NSString stringWithFormat:@"%d",[rs intForColumn:@"mid"]];
             model.manswer = [rs stringForColumn:@"manswer"];
-            model.miamge = [rs stringForColumn:@"miamge"];
+            model.mimage = [rs stringForColumn:@"miamge"];
             model.pid = [NSString stringWithFormat:@"%d",[rs intForColumn:@"pid"]];
             model.pname = [rs stringForColumn:@"pname"];
             model.sid = [NSString stringWithFormat:@"%d",[rs intForColumn:@"sid"]];
-            model.sname = [NSString stringWithFormat:@"%d",[rs intForColumn:@"sname"]];
+                model.sname = [rs stringForColumn:@"sname"];
             model.mtype = [NSString stringWithFormat:@"%d",[rs intForColumn:@"mtype"]];
-        
+                
             [arr addObject:model];
                 
             }

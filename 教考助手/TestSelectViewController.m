@@ -78,6 +78,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //答题界面跳转
     AnswerViewController *avc = [[AnswerViewController alloc]init];
     avc.number = indexPath.row;
     [self.navigationController pushViewController:avc animated:YES];

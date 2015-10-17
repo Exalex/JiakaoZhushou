@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AnswerViewController : UIViewController
+//第几章
 @property(nonatomic,assign) int number;
 
 @end

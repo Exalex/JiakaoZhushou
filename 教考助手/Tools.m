@@ -9,16 +9,18 @@
 #import "Tools.h"
 
 @implementation Tools
+
+//用来分割题干
 +(NSArray *)getAnswerWithString:(NSString *)str
 {
     NSMutableArray *array = [[NSMutableArray alloc]init];
-    //用<BR>分割字符串，返回数组
+    //以<BR>为标记分割字符串，返回数组
     NSArray *arr = [str componentsSeparatedByString:@"<BR>"];
-    //题干加入第一个元素
+    //把第一个元素（题干）加入数组
     [array addObject:arr[0]];
-    //取选项，并取出字母（前两个字符）
+    //循环arr[i+1]的元素（题干），［并去除字母substringFromIndex］
     for (int i=0; i<4; i++) {
-        [array addObject:[ arr[i+1] substringFromIndex:2]];
+        [array addObject:[arr[i+1] substringFromIndex:2]];
     }
     return array;
 }

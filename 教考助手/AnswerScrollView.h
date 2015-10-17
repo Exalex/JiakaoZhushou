@@ -11,5 +11,7 @@
 @interface AnswerScrollView : UIView
 //重写init方法
 -(instancetype)initWithFrame:(CGRect)frame withDataArray:(NSArray *)array;
-@property (nonatomic ,assign) int currentPage;//当前页数
+//当前第几题
+@property (nonatomic ,assign,readonly) int currentPage;
+
 @end
