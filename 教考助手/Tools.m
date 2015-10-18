@@ -24,4 +24,12 @@
     }
     return array;
 }
+
+//用来根据字符大小适应View
++(CGSize)getSizeWithString:(NSString *)str with:(UIFont *)font withSize:(CGSize)Size
+{
+    CGSize newSize = [str sizeWithFont:font constrainedToSize:Size];
+    return newSize;
+
+}
 @end
