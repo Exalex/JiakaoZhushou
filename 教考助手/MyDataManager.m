@@ -71,7 +71,7 @@
             model.mdesc = [rs stringForColumn:@"mdesc"];
             model.mid = [NSString stringWithFormat:@"%d",[rs intForColumn:@"mid"]];
             model.manswer = [rs stringForColumn:@"manswer"];
-            model.mimage = [rs stringForColumn:@"miamge"];
+            model.mimage = [rs stringForColumn:@"mimage"];
             model.pid = [NSString stringWithFormat:@"%d",[rs intForColumn:@"pid"]];
             model.pname = [rs stringForColumn:@"pname"];
             model.sid = [NSString stringWithFormat:@"%d",[rs intForColumn:@"sid"]];

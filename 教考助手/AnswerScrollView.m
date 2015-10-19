@@ -25,7 +25,8 @@
     UITableView *_leftTableView;
     UITableView *_mainTableView;
     UITableView *_rightTableView;
-    NSArray *_dataArray;
+    
+
 }
 
 - (instancetype)initWithFrame:(CGRect)frame withDataArray:(NSArray *)array
@@ -34,8 +35,12 @@
     if (self) {
         //初始化变量，当前为第0题
         _currentPage = 0;
-        
         _dataArray = [[NSArray alloc]initWithArray:array];
+        _hadAnswerArray = [[NSMutableArray alloc]init];
+        //答题逻辑变量，是否答过，答过0，答过纪录ABCD
+        for (int i=0; i<array.count-1; i++) {
+            [_hadAnswerArray addObject:@"0"];
+        }
         
         //初始化复用的tableView到scrollView上
         _scrollView = [[UIScrollView alloc]initWithFrame:frame];
@@ -168,9 +173,15 @@
     lab.numberOfLines = 0;
     lab.textColor = [UIColor greenColor];
     [view addSubview:lab];
-    return view;
+    
+    //得到题号
+    int page = [self getQuestionNumber:tableView andCurrentPage:_currentPage];
+    //判断是否答过，没打过不提前显示答案
+    if ([_hadAnswerArray[page-1] integerValue]!=0) {
+        return view;
+    }
+    return nil;
 }
-
 
 //判断当前显示的题号
 -(int)getQuestionNumber:(UITableView *)tableView andCurrentPage:(int)page
@@ -193,7 +204,6 @@
     return 0;
 }
 
-
 //cell的数据源方法
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -204,6 +214,7 @@
     }
     cell.numberLabel.layer.masksToBounds = YES;
     cell.numberLabel.layer.cornerRadius = 10;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.numberLabel.text = [NSString stringWithFormat:@"%c",(char)('A'+indexPath.row)];//强转成a，b，c，d
     
     //赋值先取模型
@@ -213,8 +224,26 @@
     if ([model.mtype intValue]==1) {
         cell.answerLabel.text = [[Tools getAnswerWithString:model.mquestion]objectAtIndex:indexPath.row+1];
     }
+    
+    //判断答题后显示对错图标的image
+    int page = [self getQuestionNumber:tableView andCurrentPage:_currentPage];
+    
+    if ([_hadAnswerArray[page-1] intValue]!=0) {//已经答过的情况
+        if ([model.manswer isEqualToString:[NSString stringWithFormat:@"%c",'A'+(int)indexPath.row]]) {
+            cell.numberImage.hidden = NO;
+            cell.numberImage.image = [UIImage imageNamed:@"19.png"];
+        }else if (![model.manswer isEqualToString:[NSString stringWithFormat:@"%c",'A'+[_hadAnswerArray[page-1]intValue]-1]] &&indexPath.row==[_hadAnswerArray[page-1]intValue]-1) {
+            cell.imageView.image = nil;
+            cell.numberImage.hidden = NO;
+            cell.numberImage.image = [UIImage imageNamed:@"20.png"];
+        }else{
+            cell.numberImage.hidden=YES;
+        }
+    }else{
+            cell.numberImage.hidden = YES;
+  }
     return cell;
-}
+    }
 
 //抽取的方法：选取合适的模型来给cell赋值
 -(AnswerModel *)getTheFitModel:(UITableView *)tableView
@@ -267,5 +296,23 @@
     [_mainTableView reloadData];
     [_rightTableView reloadData];
 }
+
+//tableView点击方法（点击列表答题后的操作）
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{   //判断是否答过
+    int page = [self getQuestionNumber:tableView andCurrentPage:_currentPage];
+    if ([_hadAnswerArray[page-1] integerValue]!=0) {
+        return;
+    }else{//没答过纪录下答案
+        [_hadAnswerArray replaceObjectAtIndex:page-1 withObject:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
+    }
+    //答题完之后刷新数据
+    [_leftTableView reloadData];
+    [_mainTableView reloadData];
+    [_rightTableView reloadData];
+}
+
+
+
 
 @end
