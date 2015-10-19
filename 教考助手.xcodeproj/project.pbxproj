@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA1C5CAC1BD485690047A2D5 /* SelectModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1C5CAB1BD485690047A2D5 /* SelectModelView.m */; settings = {ASSET_TAGS = (); }; };
+		FA1C5CAF1BD49BDE0047A2D5 /* SheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1C5CAE1BD49BDE0047A2D5 /* SheetView.m */; settings = {ASSET_TAGS = (); }; };
 		FA4686991BCF6CEF00AE2A51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4686981BCF6CEF00AE2A51 /* main.m */; };
 		FA46869C1BCF6CEF00AE2A51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA46869B1BCF6CEF00AE2A51 /* AppDelegate.m */; };
 		FA46869F1BCF6CEF00AE2A51 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA46869E1BCF6CEF00AE2A51 /* ViewController.m */; };
@@ -202,6 +203,8 @@
 /* Begin PBXFileReference section */
 		FA1C5CAA1BD485690047A2D5 /* SelectModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectModelView.h; sourceTree = "<group>"; };
 		FA1C5CAB1BD485690047A2D5 /* SelectModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectModelView.m; sourceTree = "<group>"; };
+		FA1C5CAD1BD49BDE0047A2D5 /* SheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheetView.h; sourceTree = "<group>"; };
+		FA1C5CAE1BD49BDE0047A2D5 /* SheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheetView.m; sourceTree = "<group>"; };
 		FA4686941BCF6CEF00AE2A51 /* 教考助手.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "教考助手.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4686981BCF6CEF00AE2A51 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FA46869A1BCF6CEF00AE2A51 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 				FA46881C1BD09EA400AE2A51 /* AnswerScrollView.m */,
 				FA1C5CAA1BD485690047A2D5 /* SelectModelView.h */,
 				FA1C5CAB1BD485690047A2D5 /* SelectModelView.m */,
+				FA1C5CAD1BD49BDE0047A2D5 /* SheetView.h */,
+				FA1C5CAE1BD49BDE0047A2D5 /* SheetView.m */,
 				FA4686C41BCFE92C00AE2A51 /* cell */,
 			);
 			name = View;
@@ -969,6 +974,7 @@
 				FA4686B71BCFB7BD00AE2A51 /* FirstTableViewCell.m in Sources */,
 				FA4688171BD08BDE00AE2A51 /* MyDataManager.m in Sources */,
 				FA46880D1BD07B5700AE2A51 /* FMDatabase.m in Sources */,
+				FA1C5CAF1BD49BDE0047A2D5 /* SheetView.m in Sources */,
 				FA4686BB1BCFDA7100AE2A51 /* TestSelectViewController.m in Sources */,
 				FA1C5CAC1BD485690047A2D5 /* SelectModelView.m in Sources */,
 				FA4688101BD07B5700AE2A51 /* FMDatabaseQueue.m in Sources */,

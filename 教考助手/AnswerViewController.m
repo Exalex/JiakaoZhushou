@@ -11,11 +11,13 @@
 #import "MyDataManager.h"
 #import "AnswerModel.h"
 #import "SelectModelView.h"
+#import "SheetView.h"
 
 @interface AnswerViewController ()
 {
     AnswerScrollView *view;
     SelectModelView *modelView;
+    SheetView * _sheetView;
 }
 @end
 
@@ -44,9 +46,18 @@
     [self creatToolBar];
     //创建模式选择视图
     [self creatModel];
+    //创建上拉菜单
+    [self creatSheet];
 }
 
-//创建模式选择视图
+//创建上拉菜单
+-(void)creatSheet
+{
+    _sheetView = [[SheetView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-80) withSuperView:self.view];
+    [self.view addSubview:_sheetView];
+}
+
+//创建模式选择视图 
 -(void)creatModel
 {
     modelView = [[SelectModelView alloc]initWithFrame:self.view.frame addTouch:^(SelectModel model) {
@@ -95,6 +106,15 @@
 -(void)creatToolBar:(UIButton *)btn
 {
     switch (btn.tag) {
+            
+        case 301://上拉菜单
+        {
+            [UIView animateWithDuration:0.3 animations:^{
+                _sheetView.frame = CGRectMake(0, 80, self.view.frame.size.width, self.view.frame.size.height-80);
+            }];
+          
+            
+        }
         case 302://点击查看答案
         {
             if ([view.hadAnswerArray[view.currentPage] intValue]!=0) {
