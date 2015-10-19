@@ -13,7 +13,7 @@
 #import "SelectModelView.h"
 #import "SheetView.h"
 
-@interface AnswerViewController ()
+@interface AnswerViewController ()<SheetViewDelegate>
 {
     AnswerScrollView *view;
     SelectModelView *modelView;
@@ -41,6 +41,7 @@
     
     //初始化自定义view
     view = [[AnswerScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-60) withDataArray:array];
+    
     [self.view addSubview:view];
     //创建工具条视图
     [self creatToolBar];
@@ -54,10 +55,23 @@
 -(void)creatSheet
 {
     _sheetView = [[SheetView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-80) withSuperView:self.view andQuesCount:50];
+    _sheetView.delegate = self;
     [self.view addSubview:_sheetView];
 }
 
-//创建模式选择视图 
+#pragma mark - delegate(点击上拉菜单btn的值)
+-(void)SheetViewClick:(int)index
+{
+    //用指针取得对象
+    UIScrollView *scroll = view->_scrollView;
+    scroll.contentOffset = CGPointMake((index-1)*scroll.frame.size.width, 0);
+    //用代理模拟滑动事件
+    [scroll.delegate scrollViewDidEndDecelerating:scroll];
+    NSLog(@"sadasdasd%@",scroll);
+
+}
+
+//创建模式选择视图
 -(void)creatModel
 {
     modelView = [[SelectModelView alloc]initWithFrame:self.view.frame addTouch:^(SelectModel model) {

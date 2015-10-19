@@ -11,6 +11,7 @@
 #import "AnswerViewController.h"
 #import "AnswerModel.h"
 #import "Tools.h"
+#import "SheetView.h"
 
 #define SIZE self.frame.size
 @interface AnswerScrollView( )<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
@@ -21,7 +22,6 @@
 
 @implementation AnswerScrollView
 {
-    UIScrollView *_scrollView;
     UITableView *_leftTableView;
     UITableView *_mainTableView;
     UITableView *_rightTableView;
@@ -65,6 +65,7 @@
         if (_dataArray.count>1) {
             _scrollView.contentSize = CGSizeMake(SIZE.width*2, 0);//scrollView的滑动范围
         }
+        
         [self creatView];
     }
     return self;

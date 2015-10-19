@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface AnswerScrollView : UIView
+{
+    @public
+    UIScrollView *_scrollView;
+}
 //重写init方法
 -(instancetype)initWithFrame:(CGRect)frame withDataArray:(NSArray *)array;
 //当前第几题

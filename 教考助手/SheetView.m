@@ -55,9 +55,14 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake((_width-44*6)/2+44*(i%6), 10+44*(i/6), 40, 40);
         btn.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];
+        if (i==0) {
+            btn.backgroundColor = [UIColor orangeColor];
+        }
         [btn setTitle:[NSString stringWithFormat:@"%d",i+1] forState:UIControlStateNormal];
         btn.layer.masksToBounds = YES;
         btn.layer.cornerRadius = 8;
+        btn.tag = 101+i;
+        [btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         [_scrollView addSubview:btn];
     }
     //滑动范围
@@ -65,6 +70,24 @@
     _scrollView.contentSize = CGSizeMake(0, 20+44*(_count/6+1+tip));
     
 }
+
+//小btn的点击方法
+-(void)click:(UIButton *)btn
+{
+    int index = (int)btn.tag-100;
+    for (int i=0; i<_count; i++) {
+        UIButton *button = (UIButton *)[self viewWithTag:i+101];
+        if (i!=index-1) {
+            button.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];
+        }else{
+            button.backgroundColor = [UIColor orangeColor];
+        }
+    }
+    //代理对象执行方法
+    [_delegate SheetViewClick:index];
+    
+}
+
 //手指在屏幕滑动时调用的函数
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
