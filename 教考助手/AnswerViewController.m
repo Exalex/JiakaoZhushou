@@ -53,7 +53,7 @@
 //创建上拉菜单
 -(void)creatSheet
 {
-    _sheetView = [[SheetView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-80) withSuperView:self.view];
+    _sheetView = [[SheetView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-80) withSuperView:self.view andQuesCount:50];
     [self.view addSubview:_sheetView];
 }
 
@@ -90,7 +90,7 @@
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png",16+i]] forState:UIControlStateNormal];
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d-2.png",16+i]] forState:UIControlStateHighlighted];
         btn.tag=301+i;
-        [btn addTarget:self action:@selector(creatToolBar:) forControlEvents:UIControlEventTouchUpInside];
+        [btn addTarget:self action:@selector(clickToolBar:) forControlEvents:UIControlEventTouchUpInside];
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(btn.center.x-30, 40, 60, 18)];
         lab.textAlignment = UITextAlignmentCenter;
@@ -103,7 +103,7 @@
     [self.view addSubview:barView];
 }
 
--(void)creatToolBar:(UIButton *)btn
+-(void)clickToolBar:(UIButton *)btn
 {
     switch (btn.tag) {
             
@@ -112,6 +112,7 @@
             [UIView animateWithDuration:0.3 animations:^{
                 _sheetView.frame = CGRectMake(0, 80, self.view.frame.size.width, self.view.frame.size.height-80);
             }];
+            _sheetView->_backView.alpha=0.8;
           
             
         }

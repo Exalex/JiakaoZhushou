@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SheetView : UIView
--(instancetype)initWithFrame:(CGRect)frame withSuperView:(UIView *)superView;
+{
+    @public
+    UIView *_backView;
+}
+-(instancetype)initWithFrame:(CGRect)frame withSuperView:(UIView *)superView andQuesCount:(int)count;
+
 @end
